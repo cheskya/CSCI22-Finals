@@ -6,14 +6,15 @@ import java.awt.*;
 public class Player {
 
     private int tileSize;
-    private int playerX, playerY, playerSpeed;
+    private int playerX, playerY;
+    private double playerSpeed;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
 
     public Player() {
         tileSize = 64;
         playerX = 100;
         playerY = 100;
-        playerSpeed = 5;
+        playerSpeed = 3.5;
     }
 
     public void draw(Graphics2D g2d) {
