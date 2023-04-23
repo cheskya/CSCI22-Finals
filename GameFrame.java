@@ -2,6 +2,8 @@
 // TITLE: DREAM TEAM (by JV :D)
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class GameFrame implements KeyListener, Runnable {
 
@@ -102,6 +104,7 @@ public class GameFrame implements KeyListener, Runnable {
         if (code == KeyEvent.VK_D) {
             canvas.getPlayer().setRight(true);
         }
+
     }
 
     @Override
@@ -123,6 +126,7 @@ public class GameFrame implements KeyListener, Runnable {
         if (code == KeyEvent.VK_D) {
             canvas.getPlayer().setRight(false);
         }
+
     }
 
     // updates the animation of players and enemies
