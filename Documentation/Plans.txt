@@ -1,0 +1,4 @@
+4/23/23 (Sunday)
+- [ ] insert the player sprite
+- [ ] get the collisions working for stage 1
+- [ ] start on the enemy behaviors

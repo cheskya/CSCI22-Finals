@@ -4,7 +4,8 @@
 import java.awt.*;
 
 public class Player {
-    private final int tileSize;
+
+    private int tileSize;
     private int playerX, playerY;
     private double playerSpeed;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
@@ -19,7 +20,6 @@ public class Player {
     public void draw(Graphics2D g2d) {
         g2d.setColor(Color.black);
         g2d.fillRect(playerX, playerY, tileSize, tileSize);
-        g2d.dispose();
     }
 
     public void movePlayer() {
@@ -55,4 +55,5 @@ public class Player {
     public void setRight(boolean bool) {
         rightPressed = bool;
     }
+  
 }

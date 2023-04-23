@@ -1,36 +1,49 @@
-// this will contain the UI of the game
-
+// this will be the frame of the game
 // TITLE: DREAM TEAM (by JV :D)
 
 import javax.swing.*;
-import java.awt.event.*;
 
 public class GameFrame implements KeyListener, Runnable {
 
-    private JFrame f;
+    public int width, height;
+    public JFrame frame;
+
+    public GameCanvas canvas;
+
+    private Thread animationThread;
     private int FPS = 60;
-    private Thread gameThread;
-    private GameCanvas gc;
 
-    public GameFrame() {
-        f = new JFrame();
-        gc = new GameCanvas();
-        f.addKeyListener(this);
-        f.setFocusable(true);
+    public GameFrame(int w, int h) {
+        width = w;
+        height = h;
+
+        frame = new JFrame();
+        canvas = new GameCanvas(width, height);
+
+        frame.addKeyListener(this);
+        frame.setFocusable(true);
     }
 
-    public void setUpGUI() {
-        f.setResizable(false);
-        f.setTitle("Test");
-        f.add(gc);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.pack();
-        f.setVisible(true);
+    public void setUpFrame() {
+
+        Container contentPane = frame.getContentPane();
+
+        contentPane.add(canvas, BorderLayout.CENTER);
+
+        frame.setSize(width, height);
+        frame.pack();
+        frame.setTitle("Dream Team");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
     }
 
-    public void startGameThread() {
-        gameThread = new Thread(this);
-        gameThread.start();
+    // --- animation thread ---
+    // updates the game graphics
+
+    public void startAnimationThread() {
+        animationThread = new Thread(this);
+        animationThread.start();
     }
 
     @Override
@@ -42,7 +55,7 @@ public class GameFrame implements KeyListener, Runnable {
         long timer = 0;
         int drawCount = 0;
 
-        while (gameThread != null) {
+        while (animationThread != null) {
             currentTime = System.nanoTime();
 
             delta += (currentTime - lastTime) / drawInterval;
@@ -51,7 +64,7 @@ public class GameFrame implements KeyListener, Runnable {
 
             if (delta >= 1) {
                 update();
-                gc.repaint();
+                canvas.repaint();
                 delta--;
                 drawCount++;
             }
@@ -63,6 +76,8 @@ public class GameFrame implements KeyListener, Runnable {
         }
     }
 
+    // --- key listeners ---
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -73,19 +88,19 @@ public class GameFrame implements KeyListener, Runnable {
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
-            gc.getPlayer().setUp(true);
+            canvas.getPlayer().setUp(true);
         }
 
         if (code == KeyEvent.VK_S) {
-            gc.getPlayer().setDown(true);
+            canvas.getPlayer().setDown(true);
         }
 
         if (code == KeyEvent.VK_A) {
-            gc.getPlayer().setLeft(true);
+            canvas.getPlayer().setLeft(true);
         }
 
         if (code == KeyEvent.VK_D) {
-            gc.getPlayer().setRight(true);
+            canvas.getPlayer().setRight(true);
         }
     }
 
@@ -94,23 +109,26 @@ public class GameFrame implements KeyListener, Runnable {
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
-            gc.getPlayer().setUp(false);
+            canvas.getPlayer().setUp(false);
         }
 
         if (code == KeyEvent.VK_S) {
-            gc.getPlayer().setDown(false);
+            canvas.getPlayer().setDown(false);
         }
 
         if (code == KeyEvent.VK_A) {
-            gc.getPlayer().setLeft(false);
+            canvas.getPlayer().setLeft(false);
         }
 
         if (code == KeyEvent.VK_D) {
-            gc.getPlayer().setRight(false);
+            canvas.getPlayer().setRight(false);
         }
     }
 
+    // updates the animation of players and enemies
+    // TODO: give the function a more descriptive name
     public void update() {
-        gc.getPlayer().movePlayer();
+        canvas.getPlayer().movePlayer();
     }
+
 }
