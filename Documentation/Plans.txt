@@ -1,0 +1,3 @@
+4/23/23 (Sunday)
+- [ ] get the collisions working for stage 1
+- [ ] start on the enemy behaviors
