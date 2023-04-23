@@ -6,7 +6,10 @@ public class GameStarter {
     public static void main(String[] args) {
 
         GameFrame game = new GameFrame(640, 640);
+
         game.setUpFrame();
+        game.startAnimationThread();
+        game.update();
 
     }
 
