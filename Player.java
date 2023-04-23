@@ -1,7 +1,12 @@
 // player appearance and functionality
 // each player is an inner class
 
+import java.io.*;
 import java.awt.*;
+import java.awt.geom.*;
+import java.awt.image.*;
+import javax.swing.*;
+import javax.imageio.*;
 
 public class Player {
 
@@ -10,16 +15,25 @@ public class Player {
     private double playerSpeed;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
 
+    private BufferedImage player1, player2;
+
     public Player() {
         tileSize = 64;
         playerX = 100;
         playerY = 100;
         playerSpeed = 3.5;
+
+        // player 1 sprite
+        try {
+            player1 = ImageIO.read( new File("Assets/Graphics/player-1.png"));
+        }
+        catch (IOException ex) {
+            System.out.println("Player 1 sprite not found!");
+        }
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.setColor(Color.black);
-        g2d.fillRect(playerX, playerY, tileSize, tileSize);
+        g2d.drawImage(player1, playerX, playerY, null);
     }
 
     public void movePlayer() {
@@ -54,6 +68,14 @@ public class Player {
 
     public void setRight(boolean bool) {
         rightPressed = bool;
+    }
+
+    public int getPlayerX() {
+        return playerX;
+    }
+
+    public int getPlayerY() {
+        return playerY;
     }
   
 }

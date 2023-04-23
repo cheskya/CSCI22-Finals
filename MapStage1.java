@@ -11,18 +11,16 @@ import javax.imageio.*;
 // THEME: clouds
 // ENEMIES: bird, mole, bunny
 
-public class MapStage1 {
+public class MapStage1 implements Map {
 
     private BufferedImage stage;
 
     public MapStage1() {
-        stage = null;
-
         try {
             stage = ImageIO.read( new File("Assets/Graphics/stage-1.png"));
         }
         catch (IOException ex) {
-            System.out.println("File not found!");
+            System.out.println("Stage 1 map not found!");
         }
     }
 
