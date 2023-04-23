@@ -1,8 +1,6 @@
 // this will be the frame of the game
 // TITLE: DREAM TEAM (by JV :D)
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class GameFrame implements KeyListener, Runnable {

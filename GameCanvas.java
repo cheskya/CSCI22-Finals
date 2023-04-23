@@ -1,9 +1,7 @@
 // will draw the screens accordingly
 
 import java.awt.*;
-import java.awt.geom.*;
 import javax.swing.*;
-import java.util.*;
 
 public class GameCanvas extends JComponent {
 
@@ -21,8 +19,6 @@ public class GameCanvas extends JComponent {
         player = new Player();
         stage1 = new MapStage1();
 
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
 
@@ -30,10 +26,7 @@ public class GameCanvas extends JComponent {
         stage1.draw(g2d);
         player.draw(g2d);
 
-    }
-
     public Player getPlayer() {
         return player;
     }
-
 }

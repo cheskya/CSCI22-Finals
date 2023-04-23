@@ -55,5 +55,5 @@ public class Player {
     public void setRight(boolean bool) {
         rightPressed = bool;
     }
-
+  
 }
