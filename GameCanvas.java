@@ -33,4 +33,34 @@ public class GameCanvas extends JComponent {
     public Player getPlayer() {
         return player;
     }
+
+    public MapStage1 getMapStage1() {
+        return stage1;
+    }
+
+    public void isPlayerCollidingEdge() {
+        if (player.getPlayerX() <= 0) {
+            player.isCollidingLeft = true;
+        } else {
+            player.isCollidingLeft = false;
+        }
+
+        if (player.getPlayerX() + player.getPlayerSize() >= width) {
+            player.isCollidingRight = true;
+        } else {
+            player.isCollidingRight = false;
+        }
+
+        if (player.getPlayerY() <= 0) {
+            player.isCollidingUp = true;
+        } else {
+            player.isCollidingUp = false;
+        }
+
+        if (player.getPlayerY() + player.getPlayerSize() >= height) {
+            player.isCollidingDown = true;
+        } else {
+            player.isCollidingDown = false;
+        }
+    }
 }

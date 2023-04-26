@@ -13,14 +13,16 @@ public class Player {
     private int tileSize;
     private int playerX, playerY;
     private double playerSpeed;
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed; 
+    public boolean isCollidingUp, isCollidingDown, isCollidingLeft, isCollidingRight;
+    public boolean isCollidingStage1Up;
 
     private BufferedImage player1, player2;
 
     public Player() {
         tileSize = 64;
-        playerX = 100;
-        playerY = 100;
+        playerX = 0;
+        playerY = 0;
         playerSpeed = 3.5;
 
         // player 1 sprite
@@ -37,19 +39,19 @@ public class Player {
     }
 
     public void movePlayer() {
-        if (upPressed == true) {
+        if (upPressed == true && isCollidingUp == false && isCollidingStage1Up == false) {
             playerY -= playerSpeed;
         }
 
-        if (downPressed == true) {
+        if (downPressed == true && isCollidingDown == false) {
             playerY += playerSpeed;
         }
 
-        if (leftPressed == true) {
+        if (leftPressed == true && isCollidingLeft == false) {
             playerX -= playerSpeed;
         }
 
-        if (rightPressed == true) {
+        if (rightPressed == true && isCollidingRight == false) {
             playerX += playerSpeed;
         }
     }
@@ -76,6 +78,30 @@ public class Player {
 
     public int getPlayerY() {
         return playerY;
+    }
+
+    public int getPlayerSize() {
+        return tileSize;
+    }
+
+    public void collideUp(boolean bool) {
+        isCollidingUp = bool;
+    }
+
+    public void collideDown(boolean bool) {
+        isCollidingDown = bool;
+    }
+
+    public void collideLeft(boolean bool) {
+        isCollidingLeft = bool;
+    }
+
+    public void collideRight(boolean bool) {
+        isCollidingRight = bool;
+    }
+
+    public void collideStage1Up(boolean bool) {
+        isCollidingStage1Up = bool;
     }
   
 }

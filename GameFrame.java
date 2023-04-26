@@ -132,6 +132,8 @@ public class GameFrame implements KeyListener, Runnable {
     // updates the animation of players and enemies
     // TODO: give the function a more descriptive name
     public void update() {
+        canvas.getMapStage1().isPlayerColliding(canvas.getPlayer());
+        canvas.isPlayerCollidingEdge();
         canvas.getPlayer().movePlayer();
     }
 

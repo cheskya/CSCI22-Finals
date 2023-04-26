@@ -5,6 +5,6 @@ import javax.swing.*;
 public interface Map {
 
     public void draw(Graphics2D g2d);
-    public boolean isPlayerColliding(Player player);
+    public void isPlayerColliding(Player player);
     
 }
