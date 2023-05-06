@@ -4,16 +4,20 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 
 public class GameFrame implements KeyListener, Runnable {
 
-    public int width, height;
+    public int width, height, playerID;
     public JFrame frame;
 
     public GameCanvas canvas;
 
     private Thread animationThread;
     private int FPS = 60;
+
+    private Socket socket;
 
     public GameFrame(int w, int h) {
         width = w;
@@ -132,9 +136,24 @@ public class GameFrame implements KeyListener, Runnable {
     // updates the animation of players and enemies
     // TODO: give the function a more descriptive name
     public void update() {
-        canvas.getMapStage1().isPlayerColliding(canvas.getPlayer());
         canvas.isPlayerCollidingEdge();
         canvas.getPlayer().movePlayer();
+    }
+
+    public void connectToServer() {
+        try {
+            socket = new Socket("localhost", 58976);
+            DataInputStream in = new DataInputStream(socket.getInputStream());
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+            playerID = in.readInt();
+            System.out.println("You are Player #" + playerID);
+            if (playerID == 1) {
+                System.out.println("Waiting for Player # 2 to connect...");
+            }
+
+        } catch (IOException ex) {
+            System.out.println("IOException from connectToServer()");
+        }
     }
 
 }
