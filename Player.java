@@ -39,7 +39,7 @@ public class Player {
     }
 
     public void movePlayer() {
-        if (upPressed == true && isCollidingUp == false && isCollidingStage1Up == false) {
+        if (upPressed == true && isCollidingUp == false) {
             playerY -= playerSpeed;
         }
 

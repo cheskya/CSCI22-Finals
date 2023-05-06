@@ -40,27 +40,27 @@ public class GameCanvas extends JComponent {
 
     public void isPlayerCollidingEdge() {
         if (player.getPlayerX() <= 0) {
-            player.isCollidingLeft = true;
+            player.collideLeft(true);
         } else {
-            player.isCollidingLeft = false;
+            player.collideLeft(false);
         }
 
         if (player.getPlayerX() + player.getPlayerSize() >= width) {
-            player.isCollidingRight = true;
+            player.collideRight(true);
         } else {
-            player.isCollidingRight = false;
+            player.collideRight(false);
         }
 
         if (player.getPlayerY() <= 0) {
-            player.isCollidingUp = true;
+            player.collideUp(true);
         } else {
-            player.isCollidingUp = false;
+            player.collideUp(false);
         }
 
         if (player.getPlayerY() + player.getPlayerSize() >= height) {
-            player.isCollidingDown = true;
+            player.collideDown(true);
         } else {
-            player.isCollidingDown = false;
+            player.collideDown(false);
         }
     }
 }

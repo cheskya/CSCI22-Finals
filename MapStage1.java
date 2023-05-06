@@ -49,16 +49,6 @@ public class MapStage1 implements Map {
 
         // will need method for Player class that returns player coordinates first
         // TODO: Watch the Drawing Tiles & Collision Detection videos in the playlist
-        if (!(player.getPlayerX() + player.getPlayerSize() <= obstacles.getObstacle1().getX() ||
-            player.getPlayerX() >= obstacles.getObstacle1().getX() + obstacles.getObstacle1().getWidth() ||
-            player.getPlayerY() + player.getPlayerSize() <= obstacles.getObstacle1().getY() ||
-            player.getPlayerY() >= obstacles.getObstacle1().getY() + obstacles.getObstacle1().getHeight())) {
-                if (!(player.getPlayerX() + player.getPlayerSize() <= obstacles.getObstacle1().getX())) {
-                    player.collideStage1Up(true);
-                } else {
-                    player.collideStage1Up(false);
-                }
-            }
 
     }
 }
