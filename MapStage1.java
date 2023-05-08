@@ -3,8 +3,8 @@ import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.*;
 import javax.swing.*;
-import javax.swing.plaf.metal.MetalPopupMenuSeparatorUI;
 import javax.imageio.*;
+import java.util.*;
 
 // holds all graphic elements and etc. for level 1
 
@@ -12,16 +12,16 @@ import javax.imageio.*;
 // THEME: clouds
 // ENEMIES: bird, mole, bunny
 
-import java.util.*;
+
 
 public class MapStage1 implements Map {
 
-    private int numObjects = 3;
+    // private int numObjects = 3;
     
     private BufferedImage stage;
-    private Player player;
-    private MapStage1Obstacles obstacles;
-    private ArrayList<MapObstacles> mapObstacles;
+    // private Player player;
+    // private MapStage1Obstacles obstacles;
+    // private ArrayList<MapObstacles> mapObstacles;
 
     public MapStage1() {
         try {
@@ -31,14 +31,14 @@ public class MapStage1 implements Map {
             System.out.println("Stage 1 map not found!");
         }
 
-        player = new Player();
-        obstacles = new MapStage1Obstacles();
+        // player = new Player();
+        // obstacles = new MapStage1Obstacles();
 
-        mapObstacles = new ArrayList<>();
+        // mapObstacles = new ArrayList<>();
 
-        mapObstacles.add(obstacles.getObstacle1());
-        mapObstacles.add(obstacles.getObstacle2());
-        mapObstacles.add(obstacles.getObstacle3());
+        // mapObstacles.add(obstacles.getObstacle1());
+        // mapObstacles.add(obstacles.getObstacle2());
+        // mapObstacles.add(obstacles.getObstacle3());
     }
 
     public void draw(Graphics2D g2d) {

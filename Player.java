@@ -10,6 +10,7 @@ import javax.imageio.*;
 
 public class Player {
 
+    public int n;
     private int tileSize;
     private int playerX, playerY;
     private double playerSpeed;
@@ -19,23 +20,60 @@ public class Player {
 
     private BufferedImage player1, player2;
 
-    public Player() {
+    public Player(int x, int y, int n) {
         tileSize = 64;
-        playerX = 0;
-        playerY = 0;
+        this.n = n;
+        playerX = x;
+        playerY = y;
         playerSpeed = 3.5;
 
         // player 1 sprite
         try {
-            player1 = ImageIO.read( new File("Assets/Graphics/player-1.png"));
+            player1 = ImageIO.read(new File("Assets/Graphics/player-1.png"));
+            player2 = ImageIO.read(new File("Assets/Graphics/player-2.png"));
         }
         catch (IOException ex) {
-            System.out.println("Player 1 sprite not found!");
+            System.out.println("Player sprite not found!");
         }
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(player1, playerX, playerY, null);
+        if (n == 1) {
+            g2d.drawImage(player1, playerX, playerY, null);
+        } else {
+            g2d.drawImage(player2, playerX, playerY, null);
+        }
+
+        // if (m == 1) {
+        //     if (n == 1) {
+        //         g2d.drawImage(player1, playerX, playerY, null);
+        //     } else {
+        //         Rectangle2D.Double player2 = new Rectangle2D.Double(playerX + 100, playerY, tileSize, tileSize);
+        //         g2d.setColor(Color.BLUE);
+        //         g2d.fill(player2);
+        //     }
+        // } else {
+        //     if (n == 1) {
+        //         Rectangle2D.Double player1 = new Rectangle2D.Double(playerX, playerY, tileSize, tileSize);
+        //         g2d.setColor(Color.BLUE);
+        //         g2d.fill(player1);
+        //     } else {
+        //         g2d.drawImage(player2, playerX + 100, playerY, null);
+        //     }
+        // }
+        // if (n == 1) {
+        //     g2d.drawImage(player1, playerX, playerY, null);
+
+        //     Rectangle2D.Double player2 = new Rectangle2D.Double(playerX + 100, playerY, tileSize, tileSize);
+        //     g2d.setColor(Color.BLUE);
+        //     g2d.fill(player2);
+        // } else if (n == 2) {
+        //     Rectangle2D.Double player1 = new Rectangle2D.Double(playerX, playerY, tileSize, tileSize);
+        //     g2d.setColor(Color.BLUE);
+        //     g2d.fill(player1);
+
+        //     g2d.drawImage(player2, playerX + 100, playerY, null);
+        // }
     }
 
     public void movePlayer() {

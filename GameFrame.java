@@ -4,8 +4,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.*;
 import java.io.*;
 import java.net.*;
+import javax.imageio.*;
 
 public class GameFrame implements KeyListener, Runnable {
 
@@ -36,6 +38,7 @@ public class GameFrame implements KeyListener, Runnable {
 
         contentPane.add(canvas, BorderLayout.CENTER);
 
+        createSprites();
         frame.setSize(width, height);
         frame.pack();
         frame.setTitle("Dream Team");
@@ -94,19 +97,35 @@ public class GameFrame implements KeyListener, Runnable {
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
-            canvas.getPlayer().setUp(true);
+            if (playerID == 1) {
+                canvas.getPlayer1().setUp(true);
+            } else {
+                canvas.getPlayer2().setUp(true);
+            }
         }
 
         if (code == KeyEvent.VK_S) {
-            canvas.getPlayer().setDown(true);
+            if (playerID == 1) {
+                canvas.getPlayer1().setDown(true);
+            } else {
+                canvas.getPlayer2().setDown(true);
+            }
         }
 
         if (code == KeyEvent.VK_A) {
-            canvas.getPlayer().setLeft(true);
+            if (playerID == 1) {
+                canvas.getPlayer1().setLeft(true);
+            } else {
+                canvas.getPlayer2().setLeft(true);
+            }
         }
 
         if (code == KeyEvent.VK_D) {
-            canvas.getPlayer().setRight(true);
+            if (playerID == 1) {
+                canvas.getPlayer1().setRight(true);
+            } else {
+                canvas.getPlayer2().setRight(true);
+            }
         }
 
     }
@@ -116,19 +135,35 @@ public class GameFrame implements KeyListener, Runnable {
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
-            canvas.getPlayer().setUp(false);
+            if (playerID == 1) {
+                canvas.getPlayer1().setUp(false);
+            } else {
+                canvas.getPlayer2().setUp(false);
+            }
         }
 
         if (code == KeyEvent.VK_S) {
-            canvas.getPlayer().setDown(false);
+            if (playerID == 1) {
+                canvas.getPlayer1().setDown(false);
+            } else {
+                canvas.getPlayer2().setDown(false);
+            }
         }
 
         if (code == KeyEvent.VK_A) {
-            canvas.getPlayer().setLeft(false);
+            if (playerID == 1) {
+                canvas.getPlayer1().setLeft(false);
+            } else {
+                canvas.getPlayer2().setLeft(false);
+            }
         }
 
         if (code == KeyEvent.VK_D) {
-            canvas.getPlayer().setRight(false);
+            if (playerID == 1) {
+                canvas.getPlayer1().setRight(false);
+            } else {
+                canvas.getPlayer2().setRight(false);
+            }
         }
 
     }
@@ -137,7 +172,8 @@ public class GameFrame implements KeyListener, Runnable {
     // TODO: give the function a more descriptive name
     public void update() {
         canvas.isPlayerCollidingEdge();
-        canvas.getPlayer().movePlayer();
+        canvas.getPlayer1().movePlayer();
+        canvas.getPlayer2().movePlayer();
     }
 
     public void connectToServer() {
@@ -153,6 +189,17 @@ public class GameFrame implements KeyListener, Runnable {
 
         } catch (IOException ex) {
             System.out.println("IOException from connectToServer()");
+            System.out.println(ex);
+        }
+    }
+
+    private void createSprites() {
+        if (playerID == 1) {
+            canvas.player1 = new Player(0, 0, 1);
+            canvas.player2 = new Player(100, 0, 2);
+        } else {
+            canvas.player1 = new Player(0, 0, 1);
+            canvas.player2 = new Player(100, 0, 2);
         }
     }
 
