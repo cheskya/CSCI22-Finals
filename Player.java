@@ -25,10 +25,10 @@ public class Player {
 
         // player 1 sprite
         try {
-            player1 = ImageIO.read( new File("Assets/Graphics/player-1.png"));
+            player1 = ImageIO.read( new File("Assets/Graphics/Players/Sister/player-sister1.png"));
         }
         catch (IOException ex) {
-            System.out.println("Player 1 sprite not found!");
+            System.out.println("Player 1 Sprite not found!");
         }
     }
 

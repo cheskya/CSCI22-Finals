@@ -17,10 +17,10 @@ public class MapStage1 implements Map {
 
     public MapStage1() {
         try {
-            stage = ImageIO.read( new File("Assets/Graphics/stage-1.png"));
+            stage = ImageIO.read( new File("Assets/Graphics/Maps/map-stage1.png"));
         }
         catch (IOException ex) {
-            System.out.println("Stage 1 map not found!");
+            System.out.println("Stage 1 Map not found!");
         }
     }
 
