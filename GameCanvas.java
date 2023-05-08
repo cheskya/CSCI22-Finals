@@ -8,7 +8,7 @@ public class GameCanvas extends JComponent {
     public int width, height;
 
     public Player player;
-    public MapStage1 stage1;
+    public ScreenStage1 stage1;
 
     public GameCanvas(int w, int h) {
 
@@ -17,7 +17,7 @@ public class GameCanvas extends JComponent {
         setPreferredSize(new Dimension(width, height));
 
         player = new Player();
-        stage1 = new MapStage1();
+        stage1 = new ScreenStage1();
     
     }
 

@@ -5,7 +5,7 @@ public class GameStarter {
 
     public static void main(String[] args) {
 
-        GameFrame game = new GameFrame(640, 640);
+        GameFrame game = new GameFrame(800, 640);
 
         game.setUpFrame();
         game.startAnimationThread();

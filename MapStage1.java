@@ -1,38 +1,38 @@
-import java.io.*;
-import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
-import javax.swing.*;
-import javax.imageio.*;
+// import java.io.*;
+// import java.awt.*;
+// import java.awt.geom.*;
+// import java.awt.image.*;
+// import javax.swing.*;
+// import javax.imageio.*;
 
-// holds all graphic elements and etc. for level 1
+// // holds all graphic elements and etc. for level 1
 
-// STAGE 1
-// THEME: clouds
-// ENEMIES: bird, mole, bunny
+// // STAGE 1
+// // THEME: clouds
+// // ENEMIES: bird, mole, bunny
 
-public class MapStage1 implements Map {
+// public class MapStage1 implements Map {
 
-    private BufferedImage stage;
+//     private BufferedImage stage;
 
-    public MapStage1() {
-        try {
-            stage = ImageIO.read( new File("Assets/Graphics/Maps/map-stage1.png"));
-        }
-        catch (IOException ex) {
-            System.out.println("Stage 1 Map not found!");
-        }
-    }
+//     public MapStage1() {
+//         try {
+//             stage = ImageIO.read( new File("Assets/Graphics/Maps/map-stage1.png"));
+//         }
+//         catch (IOException ex) {
+//             System.out.println("Stage 1 Map not found!");
+//         }
+//     }
 
-    public void draw(Graphics2D g2d) {
-        g2d.drawImage(stage, 0, 0, null);
-    }
+//     public void draw(Graphics2D g2d) {
+//         g2d.drawImage(stage, 0, 0, null);
+//     }
 
-    public boolean isPlayerColliding(Player player) {
+//     public boolean isPlayerColliding(Player player) {
 
-        // will need method for Player class that returns player coordinates first
-        return true;
+//         // will need method for Player class that returns player coordinates first
+//         return true;
 
-    }
+//     }
     
-}
+// }
