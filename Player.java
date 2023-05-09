@@ -10,7 +10,7 @@ import javax.imageio.*;
 
 public class Player {
 
-    public int n;
+    public int playerID;
     private int tileSize;
     private int playerX, playerY;
     private double playerSpeed;
@@ -20,9 +20,9 @@ public class Player {
 
     private BufferedImage player1, player2;
 
-    public Player(int x, int y, int n) {
+    public Player(int x, int y, int id) {
         tileSize = 64;
-        this.n = n;
+        playerID = id;
         playerX = x;
         playerY = y;
         playerSpeed = 3.5;
@@ -38,7 +38,7 @@ public class Player {
     }
 
     public void draw(Graphics2D g2d) {
-        if (n == 1) {
+        if (playerID == 1) {
             g2d.drawImage(player1, playerX, playerY, null);
         } else {
             g2d.drawImage(player2, playerX, playerY, null);
