@@ -13,8 +13,5 @@
 public class ScreenTitle {
 
     // variables
-
-    
-
     
 }

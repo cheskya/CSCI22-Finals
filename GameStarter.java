@@ -7,6 +7,7 @@ public class GameStarter {
 
         GameFrame game = new GameFrame(800, 640);
 
+        game.connectToServer();
         game.setUpFrame();
         game.startAnimationThread();
         game.update();

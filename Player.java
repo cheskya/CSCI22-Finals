@@ -11,29 +11,41 @@ import javax.imageio.*;
 public class Player {
 
     private int tileSize;
-    private int playerX, playerY;
+    private int playerX, playerY, playerID;
     private double playerSpeed;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
 
-    private BufferedImage player1, player2;
+    // sprites for the player characters
+    private BufferedImage player1Sprite, player2Sprite;
 
-    public Player() {
+    public Player(int x, int y, int id) {
+
         tileSize = 64;
-        playerX = 100;
-        playerY = 100;
+
+        playerID = id;
+        playerX = x;
+        playerY = y;
+
         playerSpeed = 3.5;
 
-        // player 1 sprite
+        // fetch player sprites
+        // TODO: turn this into a while loop
         try {
-            player1 = ImageIO.read( new File("Assets/Graphics/Players/Sister/player-sister1.png"));
+            player1Sprite = ImageIO.read( new File("Assets/Graphics/Players/Sister/player-sister1.png"));
+            player2Sprite = ImageIO.read( new File("Assets/Graphics/Players/Brother/player-brother1.png"));
         }
         catch (IOException ex) {
-            System.out.println("Player 1 Sprite not found!");
+            System.out.println("Player Sprites not found!");
         }
+
     }
 
     public void draw(Graphics2D g2d) {
-        g2d.drawImage(player1, playerX, playerY, null);
+        if (playerID == 1) {
+            g2d.drawImage(player1Sprite, playerX, playerY, null);
+        } else {
+            g2d.drawImage(player2Sprite, playerX, playerY, null);
+        }
     }
 
     public void movePlayer() {
@@ -52,6 +64,14 @@ public class Player {
         if (rightPressed == true) {
             playerX += playerSpeed;
         }
+    }
+
+    public void setPlayerX(int x) {
+        playerX = x;
+    }
+
+    public void setPlayerY(int y) {
+        playerY = y;
     }
 
     public void setUp(boolean bool) {
@@ -76,6 +96,10 @@ public class Player {
 
     public int getPlayerY() {
         return playerY;
+    }
+
+    public int getPlayerID() {
+        return playerID;
     }
   
 }

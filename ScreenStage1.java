@@ -11,7 +11,7 @@ import javax.imageio.*;
 // THEME: bright cloudy day
 // ENEMIES: bird, mole, bunny
 
-public class ScreenStage1 {
+public class ScreenStage1 implements Screen {
 
     private BufferedImage map;
     private GameHUD hud;
@@ -34,7 +34,9 @@ public class ScreenStage1 {
 
     // draw the screen elements
     public void draw(Graphics2D g2d) {
+        // draw the map
         g2d.drawImage(map, 0, 0, null);
+        // draw the HUD
         hud.draw(g2d);
     }
 
