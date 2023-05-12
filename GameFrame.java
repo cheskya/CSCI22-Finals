@@ -13,7 +13,6 @@ public class GameFrame implements KeyListener, Runnable {
     public JFrame frame;
 
     public GameCanvas canvas;
-    public Player p1, p2; // the current player is p1
     public Player player, otherPlayer;
 
     private Thread animationThread;
@@ -57,7 +56,6 @@ public class GameFrame implements KeyListener, Runnable {
     public void createSprites() {
         // p1 is you, p2 is friend
         // 1 is sister, 2 is brother (3rd parameter of Player)
-        System.out.println("This player is currently PID" + playerID);
         if (playerID == 1) {
             canvas.p1 = new Player(0, 0, 1);
             canvas.p2 = new Player(100, 100, 2);
@@ -108,94 +106,54 @@ public class GameFrame implements KeyListener, Runnable {
         }
     }
 
-    // --- key listeners ---
+    // updates the animation of players and enemies
+    // TODO: give the function a more descriptive name
+    public void update() {
+        handlePlayerEdgeCollision();
+        player.movePlayer();
+    }
 
-    // @Override
-    // public void keyTyped(KeyEvent e) {
+    public void handlePlayerEdgeCollision() {
+        // left edge
+        if (player.getPlayerX() <= 0) {
+            player.collideLeft(true);
+        }
+        else {
+            player.collideLeft(false);
+        }
+        // right edge
+        if (player.getPlayerX() + player.getPlayerSize() >= 640) { // hardcoded width for  (because of hud)
+            player.collideRight(true);
+        }
+        else {
+            player.collideRight(false);
+        }
+        // top edge
+        if (player.getPlayerY() <= 0) {
+            player.collideUp(true);
+        }
+        else {
+            player.collideUp(false);
+        }
+        // bottom edge
+        if (player.getPlayerY() + player.getPlayerSize() >= height) {
+            player.collideDown(true);
+        }
+        else {
+            player.collideDown(false);
+        }
+    }
 
-    // }
-
-    // @Override
-    // public void keyPressed(KeyEvent e) {
-    //     int code = e.getKeyCode();
-
-    //     if (code == KeyEvent.VK_W) {
-    //         if (playerID == 1) {
-    //             player.setUp(true);
-    //         } else {
-    //             otherPlayer.setUp(true);
-    //         }
-    //     }
-
-    //     if (code == KeyEvent.VK_S) {
-    //         if (playerID == 1) {
-    //             player.setDown(true);
-    //         } else {
-    //             otherPlayer.setDown(true);
-    //         }
-    //     }
-
-    //     if (code == KeyEvent.VK_A) {
-    //         if (playerID == 1) {
-    //             player.setLeft(true);
-    //         } else {
-    //             otherPlayer.setLeft(true);
-    //         }
-    //     }
-
-    //     if (code == KeyEvent.VK_D) {
-    //         if (playerID == 1) {
-    //             player.setRight(true);
-    //         } else {
-    //             otherPlayer.setRight(true);
-    //         }
-    //     }
-
-    // }
-
-    // @Override
-    // public void keyReleased(KeyEvent e) {
-    //     int code = e.getKeyCode();
-
-    //     if (code == KeyEvent.VK_W) {
-    //         if (playerID == 1) {
-    //             player.setUp(false);
-    //         } else {
-    //             otherPlayer.setUp(false);
-    //         }
-    //     }
-
-    //     if (code == KeyEvent.VK_S) {
-    //         if (playerID == 1) {
-    //             player.setDown(false);
-    //         } else {
-    //             otherPlayer.setDown(false);
-    //         }
-    //     }
-
-    //     if (code == KeyEvent.VK_A) {
-    //         if (playerID == 1) {
-    //             player.setLeft(false);
-    //         } else {
-    //             otherPlayer.setLeft(false);
-    //         }
-    //     }
-
-    //     if (code == KeyEvent.VK_D) {
-    //         if (playerID == 1) {
-    //             player.setRight(false);
-    //         } else {
-    //             otherPlayer.setRight(false);
-    //         }
-    //     }
+    // -- key listeners --
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        // not needed for game
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
@@ -218,6 +176,7 @@ public class GameFrame implements KeyListener, Runnable {
 
     @Override
     public void keyReleased(KeyEvent e) {
+
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W) {
@@ -236,12 +195,6 @@ public class GameFrame implements KeyListener, Runnable {
             player.setRight(false);
         }
 
-    }
-
-    // updates the animation of players and enemies
-    // TODO: give the function a more descriptive name
-    public void update() {
-        player.movePlayer();
     }
 
     // -- server things ---
@@ -282,8 +235,9 @@ public class GameFrame implements KeyListener, Runnable {
         }
 
         // the main code for the runnable
-        // gets the coordinates of the other player
-        // moves the other player accordingly
+        // gets the coordinates of the other player (and moves other player accordingly)
+        // NOTE: setPlayerX and setPlayerY must have animations bound to them
+        // gets the boolean for the collisions (and moves main player accordingly)
         public void run() {
             try {
                 while(true) {
@@ -297,7 +251,6 @@ public class GameFrame implements KeyListener, Runnable {
             }
             catch (IOException ex) {
                 System.out.println("IOException from RFS run()");
-                System.out.println(ex.toString());
             }
         }
 
@@ -332,9 +285,14 @@ public class GameFrame implements KeyListener, Runnable {
 
         // the main code
         // sends coordinates of player to server
+        // sends coordinates of collisions to server
+        // sends 
         public void run() {
             
             try {
+                // send coordinates of collisions upon first run
+                // canvas.getCurrentScreen().
+
                 while (true) {
                     if (player != null) {
                         dataOut.writeInt(player.getPlayerX());
@@ -352,7 +310,6 @@ public class GameFrame implements KeyListener, Runnable {
             }
             catch (IOException ex) {
                 System.out.println("IOException from WTS run()");
-                System.out.println(ex.toString());
             }
             
         }

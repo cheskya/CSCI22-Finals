@@ -37,7 +37,7 @@ public class GameHUD {
             System.out.println("Pixel Font not found!");
         }
         catch (FontFormatException ex) {
-            ex.printStackTrace(); // i do not know what exception this is...
+            System.out.println("FontFormatException from GameHUD!");
         }
 
         // fetch player 1 icon
