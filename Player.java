@@ -13,7 +13,7 @@ public class Player {
     private int tileSize;
     private int playerX, playerY, playerID;
     private double playerSpeed;
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    private boolean upPressed, downPressed, leftPressed, rightPressed, hitPressed;
 
     // sprites for the player characters
     private BufferedImage player1Sprite, player2Sprite;
@@ -88,6 +88,10 @@ public class Player {
 
     public void setRight(boolean bool) {
         rightPressed = bool;
+    }
+
+    public void setHit(boolean bool) {
+        hitPressed = bool;
     }
 
     public int getPlayerX() {

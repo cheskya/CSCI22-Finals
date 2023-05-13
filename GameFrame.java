@@ -68,6 +68,7 @@ public class GameFrame implements KeyListener, Runnable {
         }
         player = canvas.p1;
         otherPlayer = canvas.p2;
+
     }
 
     // --- animation thread ---
@@ -214,6 +215,10 @@ public class GameFrame implements KeyListener, Runnable {
             player.setRight(true);
         }
 
+        if (code == KeyEvent.VK_P) {
+            player.setHit(true);
+        }
+
     }
 
     @Override
@@ -234,6 +239,10 @@ public class GameFrame implements KeyListener, Runnable {
 
         if (code == KeyEvent.VK_D) {
             player.setRight(false);
+        }
+
+        if (code == KeyEvent.VK_P) {
+            player.setHit(false);
         }
 
     }
