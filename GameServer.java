@@ -17,7 +17,7 @@ public class GameServer {
     private WriteToClient p1WriteRunnable;
     private WriteToClient p2WriteRunnable;
 
-    private int p1x, p1y, p1s, p2x, p2y, p2s, p1l, p2l;
+    private int p1x, p1y, p1s, p2x, p2y, p2s, p1l, p2l, p1speed, p2speed;
 
     // creates the main serversocket, instantiates variables
     public GameServer() {
@@ -123,12 +123,14 @@ public class GameServer {
                         p1y = dataIn.readInt();
                         p1s = dataIn.readInt();
                         p1l = dataIn.readInt();
+                        p1speed = dataIn.readInt();
                     }
                     else {
                         p2x = dataIn.readInt();
                         p2y = dataIn.readInt();
                         p2s = dataIn.readInt();
                         p2l = dataIn.readInt();
+                        p2speed = dataIn.readInt();
                     }
                 }
             }
@@ -168,6 +170,7 @@ public class GameServer {
                         dataOut.writeInt(p2y);
                         dataOut.writeInt(p2s);
                         dataOut.writeInt(p2l);
+                        dataOut.writeInt(p2speed);
                         dataOut.flush();
                     }
                     else {
@@ -175,6 +178,7 @@ public class GameServer {
                         dataOut.writeInt(p1y);
                         dataOut.writeInt(p1s);
                         dataOut.writeInt(p1l);
+                        dataOut.writeInt(p1speed);
                         dataOut.flush();
                     }
 

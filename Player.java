@@ -12,7 +12,7 @@ public class Player {
 
     private int size;
     private int x, y, id, life;
-    private double speed;
+    private int speed;
     public boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed, isHitPressed, hitLock;
     public boolean isCollidingUp, isCollidingDown, isCollidingLeft, isCollidingRight;
 
@@ -164,6 +164,10 @@ public class Player {
         return size;
     }
 
+    public int getPlayerSpeed() {
+        return speed;
+    }
+
     public int getPlayerID() {
         return id;
     }
@@ -214,6 +218,10 @@ public class Player {
 
     public void setPlayerLife(int l) {
         life = l;
+    }
+
+    public void setPlayerSpeed(int s) {
+        speed = s;
     }
 
     public void setPlayerSprite(int s) {
