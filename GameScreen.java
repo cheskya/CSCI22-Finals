@@ -8,17 +8,12 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.imageio.*;
 
-// Screen
-// THEME: dreamy clouds
-// ENEMIES: bird, mole, bunny
+// the map may look relaxing but... it is a FIGHT TO THE DEATH !!!
 
 public class GameScreen {
 
     private BufferedImage map;
     private GameHUD hud;
-
-    // socket to server will be needed methinks...
-    // either that, or a reference to frame...
 
     // fetch elements included in the screen
     public GameScreen() {

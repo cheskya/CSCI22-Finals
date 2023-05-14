@@ -17,8 +17,7 @@ public class GameServer {
     private WriteToClient p1WriteRunnable;
     private WriteToClient p2WriteRunnable;
 
-    private int p1x, p1y, p2x, p2y;
-    // private ArrayList obstacles;
+    private int p1x, p1y, p1s, p2x, p2y, p2s;
 
     // creates the main serversocket, instantiates variables
     public GameServer() {
@@ -27,11 +26,6 @@ public class GameServer {
 
         numPlayers = 0;
         maxPlayers = 2;
-
-        p1x = 0;
-        p1y = 0;
-        p2x = 100;
-        p2y = 100;
 
         // connect to port
         try {
@@ -102,33 +96,7 @@ public class GameServer {
 
     }
 
-    // TODO: create a method/class that handles collision. then,
-    // sends those collision values and boolean to the client
-    // i am not sure if i should make a new thread to handle these...
-    // nevermind i won't
-    public void handlePlayerEdgeCollision() {
-        // check if player is colliding with edge
-
-        // if they are, stop movement to that edge (send to client)
-        // if they aren't, don't do anything and...
-        // set a boolean to true (let next method handle it)
-
-        // if (p1x <= 0 || p2x <= 0) {
-            
-        // }
-
-    }
-    
-    public void handlePlayerObstacleCollision() {
-        // IF boolean from prev method is true...
-
-        // check if player is colliding with obstacle
-
-        // if they are, stop movement to that obstacle (send to client)
-        // if they aren't, don't do anything.
-    }
-
-    // inner classes for threads!
+    // --- inner classes for threads! ---
 
     // read from the client
     private class ReadFromClient implements Runnable {
@@ -146,21 +114,19 @@ public class GameServer {
 
         // the main code
         // gets the player coordinates from the client
-        // then after getting their coordinates, decide whether they are colliding or not
+        // gets the player sprite from the client
         public void run() {
             try {
-                // get coordinates upon first run
-                
-                
-
                 while (true) {
                     if (playerID == 1) {
                         p1x = dataIn.readInt();
                         p1y = dataIn.readInt();
+                        p1s = dataIn.readInt();
                     }
                     else {
                         p2x = dataIn.readInt();
                         p2y = dataIn.readInt();
+                        p2s = dataIn.readInt();
                     }
                 }
             }
@@ -188,6 +154,7 @@ public class GameServer {
 
         // the main code
         // returns the coordinates of the other player to the client
+        // returns the sprite of the other player to the client
         // returns results of collision detection for the player to handle
         // (e.g. if collision is true, send that value. player will have a method
         // to handle that)
@@ -197,11 +164,13 @@ public class GameServer {
                     if (playerID == 1) {
                         dataOut.writeInt(p2x);
                         dataOut.writeInt(p2y);
+                        dataOut.writeInt(p2s);
                         dataOut.flush();
                     }
                     else {
                         dataOut.writeInt(p1x);
                         dataOut.writeInt(p1y);
+                        dataOut.writeInt(p1s);
                         dataOut.flush();
                     }
 

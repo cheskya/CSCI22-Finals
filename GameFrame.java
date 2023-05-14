@@ -57,12 +57,12 @@ public class GameFrame implements KeyListener, Runnable {
         // p1 is you, p2 is friend
         // 1 is sister, 2 is brother (3rd parameter of Player)
         if (playerID == 1) {
-            canvas.p1 = new Player(0, 0, 1);
-            canvas.p2 = new Player(100, 100, 2);
+            canvas.p1 = new Player(256, 288, 1);
+            canvas.p2 = new Player(330, 288, 2);
         }
         else {
-            canvas.p1 = new Player(100, 100, 2);
-            canvas.p2 = new Player(0, 0, 1);
+            canvas.p2 = new Player(256, 288, 1);
+            canvas.p1 = new Player(330, 288, 2);
         }
         player = canvas.p1;
         otherPlayer = canvas.p2;
@@ -113,6 +113,8 @@ public class GameFrame implements KeyListener, Runnable {
         player.movePlayer();
     }
 
+    // handles the collisions of the player with edge
+    // not too heavy on program, so made it client-side
     public void handlePlayerEdgeCollision() {
         // left edge
         if (player.getPlayerX() <= 0) {
@@ -235,17 +237,18 @@ public class GameFrame implements KeyListener, Runnable {
         }
 
         // the main code for the runnable
-        // gets the coordinates of the other player (and moves other player accordingly)
-        // NOTE: setPlayerX and setPlayerY must have animations bound to them
-        // gets the boolean for the collisions (and moves main player accordingly)
+        // gets the coordinates of the other player (and moves them accordingly)
+        // gets the current sprite of the other player (and animates them accordingly)
         public void run() {
             try {
                 while(true) {
                     int p2x = dataIn.readInt();
                     int p2y = dataIn.readInt();
+                    int p2s = dataIn.readInt();
                     if (otherPlayer != null) {
                         otherPlayer.setPlayerX(p2x);
                         otherPlayer.setPlayerY(p2y);
+                        otherPlayer.setPlayerSprite(p2s);
                     }
                 }
             }
@@ -285,23 +288,20 @@ public class GameFrame implements KeyListener, Runnable {
 
         // the main code
         // sends coordinates of player to server
-        // sends coordinates of collisions to server
-        // sends 
+        // sends current sprite of player to server
         public void run() {
             
             try {
-                // send coordinates of collisions upon first run
-                // canvas.getCurrentScreen().
-
                 while (true) {
                     if (player != null) {
                         dataOut.writeInt(player.getPlayerX());
                         dataOut.writeInt(player.getPlayerY());
+                        dataOut.writeInt(player.getCurrentSprite());
                         dataOut.flush();
                     }
 
                     try {
-                        Thread.sleep(25); // some delay for writing data (might have lag)
+                        Thread.sleep(25); // some delay for writing data
                     }
                     catch (InterruptedException ex) {
                         System.out.println("InterruptedException from WTS run()");
