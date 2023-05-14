@@ -151,12 +151,20 @@ public class GameFrame implements KeyListener, Runnable {
     // this method calculates if the players hit each other when they press the punch button
     public void handlePlayerHitCollision() {
         if (player.isHitPressed && !player.hitLock) {
-            if (!(player.getPlayerX() + player.getPlayerSize() <= otherPlayer.getPlayerX() + 24 ||
-            player.getPlayerX() + 24 >= otherPlayer.getPlayerX() + otherPlayer.getPlayerSize() ||
-            player.getPlayerY() + player.getPlayerSize() <= otherPlayer.getPlayerY() + 8 ||
-            player.getPlayerY() + 8 >= otherPlayer.getPlayerY() + otherPlayer.getPlayerSize())) {
-                System.out.println("Hit!");
-                player.setHitLock(true);
+            if (!(player.getPlayerX() + player.getPlayerSize() <= otherPlayer.getPlayerX() + 20 ||
+            player.getPlayerX() + 20 >= otherPlayer.getPlayerX() + otherPlayer.getPlayerSize() ||
+            player.getPlayerY() + player.getPlayerSize() <= otherPlayer.getPlayerY() + 12 ||
+            player.getPlayerY() + 12 >= otherPlayer.getPlayerY() + otherPlayer.getPlayerSize())) {
+                if (otherPlayer.getPlayerLife() == 1) {
+                    otherPlayer.deductLife();
+                    System.out.println(otherPlayer.getPlayerLife());
+                    System.out.println("Game Over!");
+                    player.setHitLock(true);
+                } else {
+                    otherPlayer.deductLife();
+                    System.out.println(otherPlayer.getPlayerLife());
+                    player.setHitLock(true);
+                }
             } else {
                 System.out.println("Miss!");
                 player.setHitLock(true);
@@ -272,9 +280,11 @@ public class GameFrame implements KeyListener, Runnable {
                 while(true) {
                     int p2x = dataIn.readInt();
                     int p2y = dataIn.readInt();
+                    int p2l = dataIn.readInt();
                     if (otherPlayer != null) {
                         otherPlayer.setPlayerX(p2x);
                         otherPlayer.setPlayerY(p2y);
+                        // otherPlayer.setPlayerLife(p2l);
                     }
                 }
             }
@@ -326,6 +336,7 @@ public class GameFrame implements KeyListener, Runnable {
                     if (player != null) {
                         dataOut.writeInt(player.getPlayerX());
                         dataOut.writeInt(player.getPlayerY());
+                        dataOut.writeInt(player.getPlayerLife());
                         dataOut.flush();
                     }
 

@@ -13,7 +13,7 @@ import java.util.*; // for ArrayList
 public class Player {
 
     private int size;
-    private int x, y, id;
+    private int x, y, id, life;
     private double speed;
     public boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed, isHitPressed, hitLock;
     public boolean isCollidingUp, isCollidingDown, isCollidingLeft, isCollidingRight;
@@ -32,7 +32,7 @@ public class Player {
         size = 64;
         speed = 4;
 
-        hitLock = false;
+        life = 5;
 
         // fetch player sprites
         // the player sprite fetched depends on the id
@@ -57,21 +57,25 @@ public class Player {
     }
 
     public void movePlayer() {
-        if (isUpPressed == true && isCollidingUp == false) {
+        if (isUpPressed && !isCollidingUp) {
             y -= speed;
         }
 
-        if (isDownPressed == true && isCollidingDown == false) {
+        if (isDownPressed && !isCollidingDown) {
             y += speed;
         }
 
-        if (isLeftPressed == true && isCollidingLeft == false) {
+        if (isLeftPressed && !isCollidingLeft) {
             x -= speed;
         }
 
-        if (isRightPressed == true && isCollidingRight == false) {
+        if (isRightPressed && !isCollidingRight) {
             x += speed;
         }
+    }
+
+    public void deductLife() {
+        life -= 1;
     }
 
     public int getPlayerX() {
@@ -90,12 +94,20 @@ public class Player {
         return id;
     }
 
+    public int getPlayerLife() {
+        return life;
+    }
+
     public void setPlayerX(int x) {
         this.x = x;
     }
 
     public void setPlayerY(int y) {
         this.y = y;
+    }
+
+    public void setPlayerLife(int l) {
+        life = l;
     }
 
     public void setHit(boolean bool) {

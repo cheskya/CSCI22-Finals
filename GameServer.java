@@ -17,7 +17,7 @@ public class GameServer {
     private WriteToClient p1WriteRunnable;
     private WriteToClient p2WriteRunnable;
 
-    private int p1x, p1y, p2x, p2y;
+    private int p1x, p1y, p2x, p2y, p1l, p2l;
     // private ArrayList obstacles;
 
     // creates the main serversocket, instantiates variables
@@ -32,6 +32,8 @@ public class GameServer {
         p1y = 0;
         p2x = 576;
         p2y = 576;
+        p1l = 5;
+        p2l = 5;
 
         // connect to port
         try {
@@ -157,10 +159,12 @@ public class GameServer {
                     if (playerID == 1) {
                         p1x = dataIn.readInt();
                         p1y = dataIn.readInt();
+                        p1l = dataIn.readInt();
                     }
                     else {
                         p2x = dataIn.readInt();
                         p2y = dataIn.readInt();
+                        p2l = dataIn.readInt();
                     }
                 }
             }
@@ -197,11 +201,13 @@ public class GameServer {
                     if (playerID == 1) {
                         dataOut.writeInt(p2x);
                         dataOut.writeInt(p2y);
+                        dataOut.writeInt(p2l);
                         dataOut.flush();
                     }
                     else {
                         dataOut.writeInt(p1x);
                         dataOut.writeInt(p1y);
+                        dataOut.writeInt(p1l);
                         dataOut.flush();
                     }
 
