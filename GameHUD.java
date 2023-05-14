@@ -25,13 +25,12 @@ public class GameHUD {
         this.height = h;
 
         // fetch pixel font
-        // taken from https://stackoverflow.com/questions/5652344/how-can-i-use-a-custom-font-in-java
+        // code taken from https://stackoverflow.com/questions/5652344/how-can-i-use-a-custom-font-in-java
         // further modification from https://stackoverflow.com/questions/24800886/how-to-import-a-custom-java-awt-font-from-a-font-family-with-multiple-ttf-files
         try {
             pixelFont = Font.createFont(Font.TRUETYPE_FONT, new File("Assets/Fonts/Pixel.ttf")).deriveFont(30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            //register the font
-            ge.registerFont(pixelFont);
+            ge.registerFont(pixelFont); //register the font
         }
         catch (IOException ex) {
             System.out.println("Pixel Font not found!");
