@@ -6,8 +6,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
+import java.time.*;
 
 public class GameFrame implements KeyListener, Runnable {
+
+    private Clock clock;
+    private long shootBuffer = 0;
+    private long bufferTime = 0;
 
     public int width, height;
     public JFrame frame;
@@ -33,6 +38,8 @@ public class GameFrame implements KeyListener, Runnable {
 
         frame.addKeyListener(this);
         frame.setFocusable(true);
+
+        clock = clock.systemUTC();
     }
 
     // fixes the gameframe contents
@@ -111,7 +118,7 @@ public class GameFrame implements KeyListener, Runnable {
     // TODO: give the function a more descriptive name
     public void update() {
         handlePlayerEdgeCollision();
-        handlePlayerHitCollision();
+        playerPunchAvailability();
         player.movePlayer();
     }
 
@@ -151,12 +158,36 @@ public class GameFrame implements KeyListener, Runnable {
     // boolean flag to stop player from holding down the button:
     // https://stackoverflow.com/questions/48120739/how-to-prevent-repeated-actions-from-a-key-being-held-down
     // this method calculates if the players hit each other when they press the punch button
-    public void handlePlayerHitCollision() {
-        if (player.isHitPressed && !player.hitLock) {
-            if (!(player.getPlayerX() + player.getPlayerSize() <= otherPlayer.getPlayerX() + 20 ||
+    public void playerPunchAvailability() {
+        if (player.isHitPressed && !player.hitLock && clock.millis() - shootBuffer > 1000) {
+            punch();
+
+            // if (!(player.getPlayerX() + player.getPlayerSize() <= otherPlayer.getPlayerX() + 20 ||
+            // player.getPlayerX() + 20 >= otherPlayer.getPlayerX() + otherPlayer.getPlayerSize() ||
+            // player.getPlayerY() + player.getPlayerSize() <= otherPlayer.getPlayerY() + 4 ||
+            // player.getPlayerY() + 4 >= otherPlayer.getPlayerY() + otherPlayer.getPlayerSize())) {
+            //     if (otherPlayer.getPlayerLife() == 1) {
+            //         otherPlayer.deductLife();
+            //         System.out.println(otherPlayer.getPlayerLife());
+            //         System.out.println("Game Over!");
+            //         player.setHitLock(true);
+            //     } else {
+            //         otherPlayer.deductLife();
+            //         System.out.println(otherPlayer.getPlayerLife());
+            //         player.setHitLock(true);
+            //     }
+            // } else {
+            //     System.out.println("Miss!");
+            //     player.setHitLock(true);
+            // }
+        }
+    }
+
+    public void punch() {
+        if (!(player.getPlayerX() + player.getPlayerSize() <= otherPlayer.getPlayerX() + 20 ||
             player.getPlayerX() + 20 >= otherPlayer.getPlayerX() + otherPlayer.getPlayerSize() ||
-            player.getPlayerY() + player.getPlayerSize() <= otherPlayer.getPlayerY() + 16 ||
-            player.getPlayerY() + 16 >= otherPlayer.getPlayerY() + otherPlayer.getPlayerSize())) {
+            player.getPlayerY() + player.getPlayerSize() <= otherPlayer.getPlayerY() + 4 ||
+            player.getPlayerY() + 4 >= otherPlayer.getPlayerY() + otherPlayer.getPlayerSize())) {
                 if (otherPlayer.getPlayerLife() == 1) {
                     otherPlayer.deductLife();
                     System.out.println(otherPlayer.getPlayerLife());
@@ -171,7 +202,7 @@ public class GameFrame implements KeyListener, Runnable {
                 System.out.println("Miss!");
                 player.setHitLock(true);
             }
-        }
+        shootBuffer = clock.millis();
     }
 
     // -- key listeners --
