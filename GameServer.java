@@ -30,8 +30,8 @@ public class GameServer {
 
         p1x = 0;
         p1y = 0;
-        p2x = 100;
-        p2y = 100;
+        p2x = 576;
+        p2y = 576;
 
         // connect to port
         try {

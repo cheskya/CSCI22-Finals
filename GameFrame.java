@@ -58,10 +58,10 @@ public class GameFrame implements KeyListener, Runnable {
         // 1 is sister, 2 is brother (3rd parameter of Player)
         if (playerID == 1) {
             canvas.p1 = new Player(0, 0, 1);
-            canvas.p2 = new Player(100, 100, 2);
+            canvas.p2 = new Player(576, 576, 2);
         }
         else {
-            canvas.p1 = new Player(100, 100, 2);
+            canvas.p1 = new Player(576, 576, 2);
             canvas.p2 = new Player(0, 0, 1);
         }
         player = canvas.p1;
@@ -147,14 +147,16 @@ public class GameFrame implements KeyListener, Runnable {
     }
 
     public void handlePlayerHitCollision() {
-        if (player.isHitPressed == true) {
+        if (player.isHitPressed && !player.hitLock) {
             if (!(player.getPlayerX() + player.getPlayerSize() <= otherPlayer.getPlayerX() + 24 ||
             player.getPlayerX() + 24 >= otherPlayer.getPlayerX() + otherPlayer.getPlayerSize() ||
             player.getPlayerY() + player.getPlayerSize() <= otherPlayer.getPlayerY() + 8 ||
             player.getPlayerY() + 8 >= otherPlayer.getPlayerY() + otherPlayer.getPlayerSize())) {
                 System.out.println("Hit!");
+                player.setHitLock(true);
             } else {
                 System.out.println("Miss!");
+                player.setHitLock(true);
             }
         }
     }
@@ -216,6 +218,7 @@ public class GameFrame implements KeyListener, Runnable {
 
         if (code == KeyEvent.VK_P) {
             player.setHit(false);
+            player.setHitLock(false);
         }
 
     }

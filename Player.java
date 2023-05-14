@@ -15,7 +15,7 @@ public class Player {
     private int size;
     private int x, y, id;
     private double speed;
-    public boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed, isHitPressed;
+    public boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed, isHitPressed, hitLock;
     public boolean isCollidingUp, isCollidingDown, isCollidingLeft, isCollidingRight;
 
     // sprites for the player characters
@@ -31,6 +31,8 @@ public class Player {
 
         size = 64;
         speed = 4;
+
+        hitLock = false;
 
         // fetch player sprites
         // the player sprite fetched depends on the id
@@ -98,6 +100,10 @@ public class Player {
 
     public void setHit(boolean bool) {
         isHitPressed = bool;
+    }
+
+    public void setHitLock(boolean bool) {
+        hitLock = bool;
     }
 
     public void setUp(boolean bool) {
