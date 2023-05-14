@@ -1,4 +1,4 @@
-// will draw the screens accordingly
+// the class that merges the screen with the players
 
 import java.awt.*;
 import javax.swing.*;
@@ -9,13 +9,9 @@ public class GameCanvas extends JComponent {
 
     public int width, height;
 
-    public Player p1, p2; // p1 is you, p2 is friend
-    public Screen title, stage1; // TODO: add more screens later
-    public Screen screen;
+    public Player p1, p2; // p1 is you, p2 is the other player
 
-    // TODO: ADD SOCKET HERE LATER!!!!
-
-    //private Socket socket;
+    public GameScreen screen;
 
     // instantiate gamecanvas and related elements
     public GameCanvas(int w, int h) {
@@ -24,10 +20,7 @@ public class GameCanvas extends JComponent {
         height = h;
         setPreferredSize(new Dimension(width, height));
 
-        // screens
-        stage1 = new ScreenStage1();
-        // current screen
-        screen = stage1;
+        screen = new GameScreen();
     
     }
 
@@ -52,7 +45,7 @@ public class GameCanvas extends JComponent {
         return p2;
     }
 
-    public Screen getCurrentScreen() {
+    public GameScreen getCurrentScreen() {
         return screen;
     }
 

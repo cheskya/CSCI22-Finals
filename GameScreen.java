@@ -1,4 +1,5 @@
-// screen for stage 1
+// the class that puts the game screen together for the player
+// this includes the map and the hud
 
 import java.io.*;
 import java.awt.*;
@@ -7,19 +8,23 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.imageio.*;
 
-// STAGE 1
-// THEME: bright cloudy day
+// Screen
+// THEME: dreamy clouds
 // ENEMIES: bird, mole, bunny
 
-public class ScreenStage1 implements Screen {
+public class GameScreen {
 
     private BufferedImage map;
     private GameHUD hud;
 
+    // socket to server will be needed methinks...
+    // either that, or a reference to frame...
+
     // fetch elements included in the screen
-    public ScreenStage1() {
+    public GameScreen() {
 
         // fetch current HUD
+        // hard-coded values for now, unsure if it'll be changed
         hud = new GameHUD(640, 0, 160, 640);
 
         // fetch current map
@@ -39,12 +44,5 @@ public class ScreenStage1 implements Screen {
         // draw the HUD
         hud.draw(g2d);
     }
-
-    // public boolean isPlayerColliding(Player player) {
-
-    //     // will need method for Player class that returns player coordinates first
-    //     return true;
-
-    // }
     
 }

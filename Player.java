@@ -8,31 +8,36 @@ import java.awt.image.*;
 import javax.swing.*;
 import javax.imageio.*;
 
+import java.util.*; // for ArrayList
+
 public class Player {
 
-    private int tileSize;
-    private int playerX, playerY, playerID;
-    private double playerSpeed;
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    private int size;
+    private int x, y, id;
+    private double speed;
+    public boolean isUpPressed, isDownPressed, isLeftPressed, isRightPressed;
+    public boolean isCollidingUp, isCollidingDown, isCollidingLeft, isCollidingRight;
 
     // sprites for the player characters
-    private BufferedImage player1Sprite, player2Sprite;
+    private BufferedImage p1Idle, p2Idle;
+    public ArrayList<BufferedImage> p1WalkLeft, p1WalkRight, p1WalkUp, p1WalkDown;
+    public ArrayList<BufferedImage> p2WalkLeft, p2WalkRight, p2WalkUp, p2WalkDown;
 
     public Player(int x, int y, int id) {
 
-        tileSize = 64;
+        this.id = id;
+        this.x = x;
+        this.y = y;
 
-        playerID = id;
-        playerX = x;
-        playerY = y;
-
-        playerSpeed = 3.5;
+        size = 64;
+        speed = 3.5;
 
         // fetch player sprites
-        // TODO: turn this into a while loop
+        // the player sprite fetched depends on the id
+        // TODO: turn this into a while loop?
         try {
-            player1Sprite = ImageIO.read( new File("Assets/Graphics/Players/Sister/player-sister1.png"));
-            player2Sprite = ImageIO.read( new File("Assets/Graphics/Players/Brother/player-brother1.png"));
+            p1Idle = ImageIO.read( new File("Assets/Graphics/Players/Sister/player-sister1.png"));
+            p2Idle = ImageIO.read( new File("Assets/Graphics/Players/Brother/player-brother1.png"));
         }
         catch (IOException ex) {
             System.out.println("Player Sprites not found!");
@@ -40,66 +45,87 @@ public class Player {
 
     }
 
+    // TODO: make the -16 and -32 not hardcoded...
     public void draw(Graphics2D g2d) {
-        if (playerID == 1) {
-            g2d.drawImage(player1Sprite, playerX, playerY, null);
+        if (id == 1) {
+            g2d.drawImage(p1Idle, x, y, null);
         } else {
-            g2d.drawImage(player2Sprite, playerX, playerY, null);
+            g2d.drawImage(p2Idle, x, y, null);
         }
     }
 
     public void movePlayer() {
-        if (upPressed == true) {
-            playerY -= playerSpeed;
+        if (isUpPressed == true && isCollidingUp == false) {
+            y -= speed;
         }
 
-        if (downPressed == true) {
-            playerY += playerSpeed;
+        if (isDownPressed == true && isCollidingDown == false) {
+            y += speed;
         }
 
-        if (leftPressed == true) {
-            playerX -= playerSpeed;
+        if (isLeftPressed == true && isCollidingLeft == false) {
+            x -= speed;
         }
 
-        if (rightPressed == true) {
-            playerX += playerSpeed;
+        if (isRightPressed == true && isCollidingRight == false) {
+            x += speed;
         }
-    }
-
-    public void setPlayerX(int x) {
-        playerX = x;
-    }
-
-    public void setPlayerY(int y) {
-        playerY = y;
-    }
-
-    public void setUp(boolean bool) {
-        upPressed = bool;
-    }
-
-    public void setDown(boolean bool) {
-        downPressed = bool;
-    }
-
-    public void setLeft(boolean bool) {
-        leftPressed = bool;
-    }
-
-    public void setRight(boolean bool) {
-        rightPressed = bool;
     }
 
     public int getPlayerX() {
-        return playerX;
+        return this.x;
     }
 
     public int getPlayerY() {
-        return playerY;
+        return this.y;
+    }
+
+    public int getPlayerSize() {
+        return size;
     }
 
     public int getPlayerID() {
-        return playerID;
+        return id;
+    }
+
+    public void setPlayerX(int x) {
+        this.x = x;
+    }
+
+    public void setPlayerY(int y) {
+        this.y = y;
+    }
+
+    public void setUp(boolean bool) {
+        isUpPressed = bool;
+    }
+
+    public void setDown(boolean bool) {
+        isDownPressed = bool;
+    }
+
+    public void setLeft(boolean bool) {
+        isLeftPressed = bool;
+    }
+
+    public void setRight(boolean bool) {
+        isRightPressed = bool;
+    }
+
+    public void collideUp(boolean bool) {
+        isCollidingUp = bool;
+    }
+
+    public void collideDown(boolean bool) {
+        isCollidingDown = bool;
+    }
+
+    public void collideLeft(boolean bool) {
+        isCollidingLeft = bool;
+    }
+
+    public void collideRight(boolean bool) {
+        isCollidingRight = bool;
     }
   
 }
