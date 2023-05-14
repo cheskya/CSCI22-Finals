@@ -146,6 +146,9 @@ public class GameFrame implements KeyListener, Runnable {
         }
     }
 
+    // boolean flag to stop player from holding down the button:
+    // https://stackoverflow.com/questions/48120739/how-to-prevent-repeated-actions-from-a-key-being-held-down
+    // this method calculates if the players hit each other when they press the punch button
     public void handlePlayerHitCollision() {
         if (player.isHitPressed && !player.hitLock) {
             if (!(player.getPlayerX() + player.getPlayerSize() <= otherPlayer.getPlayerX() + 24 ||
