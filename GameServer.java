@@ -174,7 +174,7 @@ public class GameServer {
                         dataOut.writeInt(p1x);
                         dataOut.writeInt(p1y);
                         dataOut.writeInt(p1s);
-                        dataOut.writeInt(p2l);
+                        dataOut.writeInt(p1l);
                         dataOut.flush();
                     }
 

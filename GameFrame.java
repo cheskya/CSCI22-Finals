@@ -10,6 +10,8 @@ import java.time.*;
 
 public class GameFrame implements KeyListener, Runnable {
 
+    // clock
+    // https://docs.oracle.com/javase/8/docs/api/java/time/Clock.html
     private Clock clock;
     private long shootBuffer = 0;
     private long bufferTime = 0;
@@ -19,6 +21,7 @@ public class GameFrame implements KeyListener, Runnable {
 
     public GameCanvas canvas;
     public Player player, otherPlayer;
+    public Punch punch;
 
     private Thread animationThread;
     private int FPS = 60;
