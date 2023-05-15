@@ -202,6 +202,7 @@ public class Player implements DrawingObject {
         }
         
         // code inspiration from https://youtu.be/wT9uNGzMEM4
+        
         frameCounter++;
         if (frameCounter > 10) { // update the sprite every 10 frames
             if (spriteCounter == 1) {

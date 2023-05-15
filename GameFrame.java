@@ -150,6 +150,8 @@ public class GameFrame implements KeyListener, Runnable {
      * Then, it repaints the canvas according to the FPS.
      */
 
+    // code inspiration from https://youtu.be/VpH33Uw-_0E
+
     @Override
     public void run() {
         double drawInterval = 1000000000/FPS;
@@ -245,6 +247,7 @@ public class GameFrame implements KeyListener, Runnable {
 
     // boolean flag to stop player from holding down the button:
     // https://stackoverflow.com/questions/48120739/how-to-prevent-repeated-actions-from-a-key-being-held-down
+    
     public void playerPunchAvailability() {
         if (player.isHitPressed && !player.hitLock && clock.millis() - shootBuffer > 1000) {
             punch();
