@@ -41,7 +41,6 @@ public class Player implements DrawingObject {
     private int frameCounter, spriteCounter;
     private BufferedImage currentSprite;
     private BufferedImage idle, walkUp1, walkUp2, walkDown1, walkDown2, walkLeft1, walkLeft2, walkRight1, walkRight2, hit, hurt, win, lose;
-    private BufferedImage explosion;
     
     /**
      * This constructor initializes important values for the player. It also fetches
@@ -100,7 +99,6 @@ public class Player implements DrawingObject {
                 lose = ImageIO.read(new File("Assets/Graphics/Players/Brother/player-brother12.png"));
                 hurt = ImageIO.read(new File("Assets/Graphics/Players/Brother/player-brother13.png"));
             }
-            explosion = ImageIO.read(new File("Assets/Graphics/explosion.gif"));
         }
         catch (IOException ex) {
             System.out.println("Player Sprites not found!");
@@ -316,9 +314,6 @@ public class Player implements DrawingObject {
         else if (currentSprite == lose) {
             return 12;
         }
-        else if (currentSprite == explosion) {
-            return 13;
-        }
         else {
             return 0; // idle
         }
@@ -403,9 +398,6 @@ public class Player implements DrawingObject {
         }
         else if (s == 12) {
             currentSprite = lose;
-        }
-        else if (s == 13) {
-            currentSprite = explosion;
         }
         else if (s == 0) {
             currentSprite = idle;
