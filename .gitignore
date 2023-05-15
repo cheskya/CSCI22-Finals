@@ -3,3 +3,6 @@
 
 # remove txt files (mostly for taking notes)
 *.txt
+
+# remove documentation folder
+Documentation/
